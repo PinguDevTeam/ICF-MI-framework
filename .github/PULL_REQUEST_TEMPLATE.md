@@ -1,12 +1,14 @@
 ## Purpose
-Explain the goal of this PR, if it addresses an existing issue be sure to link to it.
-Tag each of the issues that you are addressing with this PR with "Closes #<issueNumber>"
-Describe the big picture of your changes here, perhaps using a bullet list if multiple changes are done to accomplish a single goal.
-If it accomplishes multiple goals, it would be best to create separate PR's for each. 
+_Explain the goal of this PR, if it addresses an existing issue be sure to link to it._
+
+_Tag each of the issues that you are addressing with this PR with "Closes #<issueNumber>"_
+
+_Describe the big picture of your changes here, perhaps using a bullet list if multiple changes are done to accomplish a single goal._
+_(If it accomplishes too many goals, it would be best to create separate PR's for each.)_
 
 
 ## Type of change
-What types of change is it?
+_What types of change is it?_
 _Select the appropriate type(s) that describe this PR_
 
 - Bugfix (non-breaking change which fixes an issue)
