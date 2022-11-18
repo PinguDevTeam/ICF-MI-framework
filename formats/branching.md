@@ -50,7 +50,7 @@ Each time you start to work on a branch, please `fetch` all the changes from the
 
 If there are changes affecting your active branch. Please get all the changes from the relevant parent branch using the command 
 
-```git merge <name of child branch> <name of the parent branch>```
+```git merge <name of child branch> origin/<path of the parent branch>```
 
 Please commit those merges appropriately according to the naming convention
 
