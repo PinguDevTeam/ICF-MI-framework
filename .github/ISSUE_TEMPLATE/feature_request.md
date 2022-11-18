@@ -4,6 +4,7 @@ about: Suggest an idea for this project
 title: "[FR]"
 labels: enhancement
 assignees: 
+milestone:
 
 ---
 <!-- Welcome to a feature request issue. Please read this before creating the issue if this is your first time!!! -->
@@ -15,6 +16,7 @@ assignees:
     2- Labels: Label the issue properly. Select the label according to which part of the pipeline it would go. 
     3- Assignee(s): Assign the issue to people that SHOULD address the issue according to the responsibilities.
         Also tag the people in the correspondence section.
+    4- Milestone: For which milestone do you want this task done?
     -->
 
 # Description of feature
