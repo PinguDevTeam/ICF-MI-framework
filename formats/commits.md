@@ -44,3 +44,11 @@ This is a 7/10 commit message:
 > Created markdown file for bug report issues.
 
 Note that the scope does not exactly indicate to which file I've modified. You can still understand it from the subject line, hence 7/10.
+
+Now, what **_not_** to do:
+
+> updated commits.md
+
+Commit message not descriptive at all. Only states which file is modified, no mention of _what_ is done. No detailed explanation given. 0% backtracking possibility, you will 100% end up checking the changed code to understand what happened. Don't do it. Just.. Don't. 
+
+If I see you doing this, I'll hunt you down.
