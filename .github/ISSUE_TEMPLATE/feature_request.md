@@ -11,7 +11,7 @@ assignees:
 <!--As the issue creator, you have some responsibilities. 
     Fulfillng these responsibilities will make everyone's life easier and will also make the work easier to follow 
     There are some things that you HAVE TO do so that proper person sees the issue and the issue is resolved quickly.
-    1- Title: Create a concise title that summarizes the core of your problem. DO NOT REMOVE [FR] TAG!!!
+    1- Title: Create a concise title that summarizes the core of your request. DO NOT REMOVE [FR] TAG!!!
     2- Labels: Label the issue properly. Select the label according to which part of the pipeline it would go. 
     3- Assignee(s): Assign the issue to people that SHOULD address the issue according to the responsibilities.
         Also tag the people in the correspondence section.
