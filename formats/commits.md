@@ -1,4 +1,4 @@
-## Commits
+# Commits
 Commits are a very important part of the development process that helps documenting intermediate steps and allows backtracking
 There are some practices we need to follow (or stay away) for a better life
 
@@ -9,15 +9,17 @@ There are some practices we need to follow (or stay away) for a better life
 4. _Follow_ the format: Having a unified commit message format will allow us to search efficiently.
     We will follow the format:
 
-> <tag>(<scope>): <subject>
+> tag(scope): subject
 
-> <Explanation in full sentences>
+> Explanation in full sentences
 
 _tag_: Pick the most appropriate tag from the list below
+
 _scope_: Represents the place where the code changes are made (file name is a good candidate)
+
 _subject_: Brief summary(30-40 characters) of the changes with couple words. Use imperative mood. Don't end with a period.
 
-# Tags for commit messages
+## Tags for commit messages
 
 - feat – If you work on a new feature
 - fix – If your code changes help in fixing some bug
@@ -32,11 +34,13 @@ _subject_: Brief summary(30-40 characters) of the changes with couple words. Use
 This is what I'm expecting in this repository:
 
 > chore(todo): create todo ticket
+
 > Created to-do item ticket template for communication.
 
 This is a 7/10 commit message:
 
 > chore(template): create bug report template
+
 > Created markdown file for bug report issues.
 
 Note that the scope does not exactly indicate to which file I've modified. You can still understand it from the subject line, hence 7/10.
