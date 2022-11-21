@@ -11,23 +11,23 @@ Here for this pipeline we have 4 major development items
 3. Surrogate modeling
 4. Model identifiability
 
-Each of those major development items will have individual branches. We will be working with branches *under* those major development branches. 
+Each of those major development items will have individual branches. We will be working with branches *under* those major development branches.
 
 Each branch will have at least one related issue. You can have address more than one issue with a branch but please try to tackle a reasonable number of issues with a single branch. It's okay for you to have/work on more than one branch.
 
-The naming convention for each branch will have the following structure 
+The naming convention for each branch will have the following structure
 
 ```<tag>/<your name>/<number of issue(s) you are addressing>```
 
 If you are addressing more than one issue with a single branch, combine the branch numbers with underscores. An example with mutliple branches is
 
-```chore/doruk/1_2``` 
+```chore/doruk/1_2```
 
 This means `doruk` is addressing the issues #1 and #2 that falls under `chore` category.
 
 You will be using ```git checkout <branch name>``` command from command line to switch between branches (or you can use the branch button bottom left corner of VSCode). Please note that you have to either commit stash all your changes in one branch before checking out another branch.
 
-To create a new branch please use 
+To create a new branch please use
 
 ```git checkout -b <branch name> <name of the branch that you are branching out from>```
 
@@ -48,12 +48,14 @@ It's the responsibility of the requestor to assign reviewers (as if there are to
 
 Each time you start to work on a branch, please `fetch` all the changes from the reposit using `git fetch` and check if there are any changes affecting your current active branch using `git status`.
 
-If there are changes affecting your active branch. Please get all the changes from the relevant parent branch using the command 
+If there are changes affecting your active branch. Please get all the changes from the relevant parent branch using the command
 
 ```git merge <name of child branch> origin/<path of the parent branch>```
 
 Please commit those merges appropriately according to the naming convention
 
 Once you work on a small task towards addressing a issue, please commit your changes in small packages. *Don't* commit a change where you modify 42 lines of code affecting the functionality of numerous functions. Scope out your work and commit them in bite-sized chunks. You can select which changes you want to stage from a file with numerous lines of change.
+
+At any point in time if you require to see the HEAD state (pointer to your local) or the last commit that was made on the branch you can use ```git log```.
 
 Once you have committed your changes with an appropriate [commit message](https://github.com/PinguDevTeam/ICF-MI-framework/blob/91ffb3dd783ecc1843eb7a1314276d4ef1636d69/formats/commits.md), push your changes when you are ready. This action will not push the code to the main branch, it will just update the code on your active branch. The commits you have made will be visible in the related PR.
