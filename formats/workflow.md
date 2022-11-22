@@ -14,7 +14,29 @@ You can create issues for the following 3 cases:
 
 There are templates for all of the cases. You just need to follow the directions in each template. Don't forget to assign appropriate labels to the issue, and assign the issue to the relevant person and milestone. 
 
-Each time you start to work on a branch, please `fetch` all the changes from the reposit using `git fetch` and check if there are any changes affecting your current active branch using `git status`.
+## Creating a branch
+
+Once you know which issue(s) you will address you will need to create a branch. Please check the details in the [branching guideline](https://github.com/PinguDevTeam/ICF-MI-framework/formats/branching.md) for further details.
+
+You can create a branch using the following command
+
+`git checkout -b <branch name> <name of the parent branch>`
+
+Alternatively you can create branches using
+
+`git branch <branch name>`
+
+However, you need to be careful with that. Using `git branch` creates branch from your currently checked-out branch. Similar to the `git checkout` procedure, if you specify the parent branch in the command as
+
+`git branch <branch name> <name of the parent branch>`
+
+you can specify from which branch you want to branch out.
+
+An important topic here is the distinction between `main` and `origin/main`. `main` is the **clone** of the `main` branch on the remote repository (in our case github), whereas `origin/main` is the `main` branch of github. The same applies for any branch that is on github. So please keep the difference between those two in mind while creating branches for your issues.
+
+If you want to delete a branch you can use the command
+
+`git branch -d <name of the branch>`
 
 If there are changes affecting your active branch. Please get all the changes from the relevant parent branch using the command
 
