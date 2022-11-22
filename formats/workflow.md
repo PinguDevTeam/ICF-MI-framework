@@ -76,6 +76,14 @@ to commit without the text editor interface.
 
 In VSCode, this is much easier and is achieved through the `source control` menu on the left ribbon. Using that interface you can easily create, stage and commit your changes.
 
+If you accidentally commited and want to undo your last commit, you can use the following command
+
+`git reset --soft HEAD~1`
+
+This will revert your last commit on the repository and get you to the point in time where you staged your changes. 
+
+*Don't* commit a change where you modify 42 lines of code affecting the functionality of numerous functions. Scope out your work and commit them in bite-sized chunks. You can select which changes you want to stage from a file with numerous lines of change.
+
 
 At any point in time if you require to see the HEAD state (pointer to your local) or the last commit that was made on the branch you can use ```git log```.
 
