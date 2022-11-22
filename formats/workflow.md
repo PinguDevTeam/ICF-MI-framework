@@ -38,6 +38,9 @@ If you want to delete a branch you can use the command
 
 `git branch -d <name of the branch>`
 
+## Working on a branch
+
+Each time you start to work on a branch, please **fetch** all the changes from the reposit using `git fetch` and check if there are any changes affecting your current active branch using 
 If there are changes affecting your active branch. Please get all the changes from the relevant parent branch using the command
 
 ```git merge <name of child branch> origin/<path of the parent branch>```
