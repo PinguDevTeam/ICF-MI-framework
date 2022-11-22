@@ -4,12 +4,27 @@ This markdown file describes the structure we will follow for branches and how w
 
 ## Branches
 
-Here for this pipeline we have 4 major development items
+For development, we will have a `dev` branch that has `main` as its parent branch. For issues labeled as `enhancement`, we will create branches out from `dev` using the naming convention that we will discuss below. 
 
-1. Dataset
-2. Feature extraction
-3. Surrogate modeling
-4. Model identifiability
+Note that we will *never* attempt to push any feature enhancements to `main` branch. All features will be unified and tested in `dev` branch before releasing them to `main`. Only `chore` type pull requests addressing issues in the general repository structure can be pushed directly from issue branches.
+
+In the repository we will have the following subdirectories:
+- __src__ : for source files
+- __doc__ : for documentation
+- __examples__ : for atomic examples
+- __data__ : for dataset
+- __formats__ : for guidelines
+- __.github__ : for github templates
+
+Each folder will be properly documented through `README.md` files that describe the contents of each subdirectory.
+
+Here for this pipeline we have 3 major development items
+
+1. Feature extraction
+2. Surrogate modeling
+3. Model identifiability
+
+Each of those major development items will have individual subdirectories under `/src`.
 
 Each of those major development items will have individual branches. We will be working with branches *under* those major development branches.
 
