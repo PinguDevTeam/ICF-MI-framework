@@ -52,7 +52,15 @@ If there are changes affecting your active branch. Please get all the changes fr
 
 ```git merge <name of child branch> origin/<path of the parent branch>```
 
-Please commit those merges appropriately according to the naming convention
+Please commit those merges appropriately according to the naming convention. 
+
+Once you work on a small task towards addressing a issue, please **commit** your changes in small packages. To commit your changes, you first need to **add/stage** your changes. In VSCode you can see the changes you made from the color on the left of your code. **Blue** indicates a modification, **Green** indicates new lines, and **Red** indicates deletion. On VSCode you can `stage` your changes by clicking on the colored strip and clicking on the `+` sign on the top right corner of the opened box showing the content of the changes.
+
+If you follow good committing practices (like we all should do), you can simply use the command
+
+`git add <name of the file to add to commit>`
+
+to stage the changes in a given file for a commit.
 
 Once you work on a small task towards addressing a issue, please commit your changes in small packages. *Don't* commit a change where you modify 42 lines of code affecting the functionality of numerous functions. Scope out your work and commit them in bite-sized chunks. You can select which changes you want to stage from a file with numerous lines of change.
 
