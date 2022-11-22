@@ -29,6 +29,7 @@ _subject_: Brief summary(30-40 characters) of the changes with couple words. Use
 - test – If new tests are added or old tests are modified
 - chore – Maintenance changes for having a repository
 - WIP – If you need to change computers while working and didn't get the chance to finish your work but need to save it for now
+- CI – If you are merging any changes from a parent branch (stands for Continuous Integration)
 
 # Proper commit messages (from #4)
 This is what I'm expecting in this repository:
