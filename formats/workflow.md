@@ -91,4 +91,15 @@ Once you have committed your changes with an appropriate [commit message](https:
 
 This action will not push the code to the main branch, it will just update the code on your active branch. The commits you have made will be visible in the related PR.
 
-Once you have committed your changes with an appropriate [commit message](https://github.com/PinguDevTeam/ICF-MI-framework/blob/91ffb3dd783ecc1843eb7a1314276d4ef1636d69/formats/commits.md), push your changes when you are ready. This action will not push the code to the main branch, it will just update the code on your active branch. The commits you have made will be visible in the related PR.
+At any point in time if you require to see the HEAD state (pointer to your local) or the last commit that was made on the branch you can use the command 
+`git log`
+
+This will provide you a detailed breakdown of the history of the branch including date, time, author and both lines of the commit message
+
+If you don't want to see that much details and just the main commit message is sufficient for you, you can use the command 
+
+`git log --oneline`
+
+If you want to see the tree structure on top of this you can use the command
+
+`git log --oneline --graph`
