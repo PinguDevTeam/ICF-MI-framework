@@ -1,4 +1,18 @@
-## General Workflow
+# Workflow
+
+This document explains the workflow we will follow as a development group and provides examples for git commands we will use.
+
+## Creating an issue
+
+The workflow starts with creating an issue on github.
+
+You can create issues for the following 3 cases:
+
+1. **[BUG]** : reporting a bug
+2. **[FR]** : requesting a feature from a collaborator
+3. **[TODO]** : creating a to-do item for workflow transparency and milestone tracking 
+
+There are templates for all of the cases. You just need to follow the directions in each template. Don't forget to assign appropriate labels to the issue, and assign the issue to the relevant person and milestone. 
 
 Each time you start to work on a branch, please `fetch` all the changes from the reposit using `git fetch` and check if there are any changes affecting your current active branch using `git status`.
 
