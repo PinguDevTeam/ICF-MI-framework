@@ -41,6 +41,13 @@ If you want to delete a branch you can use the command
 ## Working on a branch
 
 Each time you start to work on a branch, please **fetch** all the changes from the reposit using `git fetch` and check if there are any changes affecting your current active branch using 
+
+`git status`
+
+If you don't want to see too much detail on the status of your current branch and just want to see which files are modified/created, you can use the command 
+
+`git status -s`
+
 If there are changes affecting your active branch. Please get all the changes from the relevant parent branch using the command
 
 ```git merge <name of child branch> origin/<path of the parent branch>```
