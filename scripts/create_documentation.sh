@@ -5,6 +5,7 @@
 cd docs
 echo $PWD
 
+rm `find . -name "*rst" ! -name "index.rst" ! -name "introduction.rst"`
 sphinx-apidoc -o . ../
 make html
 make latexpdf
