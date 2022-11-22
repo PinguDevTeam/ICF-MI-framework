@@ -62,7 +62,20 @@ If you follow good committing practices (like we all should do), you can simply 
 
 to stage the changes in a given file for a commit.
 
-Once you work on a small task towards addressing a issue, please commit your changes in small packages. *Don't* commit a change where you modify 42 lines of code affecting the functionality of numerous functions. Scope out your work and commit them in bite-sized chunks. You can select which changes you want to stage from a file with numerous lines of change.
+Once you staged all the changes you want in a given commit, you can use the command
+
+`git commit`
+
+This will open a text editor in terminal for you to enter your commit message. Please follow the guideline on [how to commit](https://github.com/PinguDevTeam/ICF-MI-framework/formats/commits.md) while writing your commit messages. Once 
+
+If you don't want to have a second line in your commit message, you can use
+
+`git commit -m "<commit message>"`
+
+to commit without the text editor interface.
+
+In VSCode, this is much easier and is achieved through the `source control` menu on the left ribbon. Using that interface you can easily create, stage and commit your changes.
+
 
 At any point in time if you require to see the HEAD state (pointer to your local) or the last commit that was made on the branch you can use ```git log```.
 
