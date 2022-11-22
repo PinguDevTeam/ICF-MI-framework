@@ -26,13 +26,13 @@ Here for this pipeline we have 3 major development items
 
 Each of those major development items will have individual subdirectories under `/src`.
 
-Each of those major development items will have individual branches. We will be working with branches *under* those major development branches.
+## Issues 
 
 Each branch will have at least one related issue. You can have address more than one issue with a branch but please try to tackle a reasonable number of issues with a single branch. It's okay for you to have/work on more than one branch.
 
 The naming convention for each branch will have the following structure
 
-```<tag>/<your name>/<number of issue(s) you are addressing>```
+```<tag>/<your name>/<ID's issue(s) you are addressing>```
 
 If you are addressing more than one issue with a single branch, combine the branch numbers with underscores. An example with mutliple branches is
 
@@ -44,11 +44,11 @@ You will be using ```git checkout <branch name>``` command from command line to 
 
 To create a new branch please use
 
-```git checkout -b <branch name> <name of the branch that you are branching out from>```
+```git checkout -b <branch name> <name of the parent branch>```
 
-command. For example, if `sahil` is going to work on a `bug` on `GIM` branch that was reported in issue `#31`, he will use
+command. For example, if `sahil` is going to work on a `bug` on `dev` branch that was reported in issue `#31`, he will use
 
-```git checkout -b bug/sahil/31 GIM```
+```git checkout -b bug/sahil/31 dev```
 
 command. Each issue will be referred in a pull request and will be linked to a milestone. So it's important that branches will follow a naming convention.
 
