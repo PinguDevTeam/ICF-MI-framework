@@ -10,9 +10,9 @@ You can create issues for the following 3 cases:
 
 1. **[BUG]** : reporting a bug
 2. **[FR]** : requesting a feature from a collaborator
-3. **[TODO]** : creating a to-do item for workflow transparency and milestone tracking 
+3. **[TODO]** : creating a to-do item for workflow transparency and milestone tracking
 
-There are templates for all of the cases. You just need to follow the directions in each template. Don't forget to assign appropriate labels to the issue, and assign the issue to the relevant person and milestone. 
+There are templates for all of the cases. You just need to follow the directions in each template. Don't forget to assign appropriate labels to the issue, and assign the issue to the relevant person and milestone.
 
 ## Creating a branch
 
@@ -40,11 +40,11 @@ If you want to delete a branch you can use the command
 
 ## Working on a branch
 
-Each time you start to work on a branch, please **fetch** all the changes from the reposit using `git fetch` and check if there are any changes affecting your current active branch using 
+Each time you start to work on a branch, please **fetch** all the changes from the reposit using `git fetch` and check if there are any changes affecting your current active branch using
 
 `git status`
 
-If you don't want to see too much detail on the status of your current branch and just want to see which files are modified/created, you can use the command 
+If you don't want to see too much detail on the status of your current branch and just want to see which files are modified/created, you can use the command
 
 `git status -s`
 
@@ -52,7 +52,7 @@ If there are changes affecting your active branch. Please get all the changes fr
 
 ```git merge <name of child branch> origin/<path of the parent branch>```
 
-Please commit those merges appropriately according to the naming convention. 
+Please commit those merges appropriately according to the naming convention.
 
 Once you work on a small task towards addressing a issue, please **commit** your changes in small packages. To commit your changes, you first need to **add/stage** your changes. In VSCode you can see the changes you made from the color on the left of your code. **Blue** indicates a modification, **Green** indicates new lines, and **Red** indicates deletion. On VSCode you can `stage` your changes by clicking on the colored strip and clicking on the `+` sign on the top right corner of the opened box showing the content of the changes.
 
@@ -66,7 +66,7 @@ Once you staged all the changes you want in a given commit, you can use the comm
 
 `git commit`
 
-This will open a text editor in terminal for you to enter your commit message. Please follow the guideline on [how to commit](https://github.com/PinguDevTeam/ICF-MI-framework/formats/commits.md) while writing your commit messages. Once 
+This will open a text editor in terminal for you to enter your commit message. Please follow the guideline on [how to commit](https://github.com/PinguDevTeam/ICF-MI-framework/formats/commits.md) while writing your commit messages. Once
 
 If you don't want to have a second line in your commit message, you can use
 
@@ -80,7 +80,7 @@ If you accidentally commited and want to undo your last commit, you can use the 
 
 `git reset --soft HEAD~1`
 
-This will revert your last commit on the repository and get you to the point in time where you staged your changes. 
+This will revert your last commit on the repository and get you to the point in time where you staged your changes.
 
 *Don't* commit a change where you modify 42 lines of code affecting the functionality of numerous functions. Scope out your work and commit them in bite-sized chunks. You can select which changes you want to stage from a file with numerous lines of change.
 
@@ -91,12 +91,12 @@ Once you have committed your changes with an appropriate [commit message](https:
 
 This action will not push the code to the main branch, it will just update the code on your active branch. The commits you have made will be visible in the related PR.
 
-At any point in time if you require to see the HEAD state (pointer to your local) or the last commit that was made on the branch you can use the command 
+At any point in time if you require to see the HEAD state (pointer to your local) or the last commit that was made on the branch you can use the command
 `git log`
 
 This will provide you a detailed breakdown of the history of the branch including date, time, author and both lines of the commit message
 
-If you don't want to see that much details and just the main commit message is sufficient for you, you can use the command 
+If you don't want to see that much details and just the main commit message is sufficient for you, you can use the command
 
 `git log --oneline`
 

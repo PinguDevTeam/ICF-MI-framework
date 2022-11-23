@@ -4,7 +4,7 @@ This markdown file describes the structure we will follow for branches and how w
 
 ## Branches
 
-For development, we will have a `dev` branch that has `main` as its parent branch. For issues labeled as `enhancement`, we will create branches out from `dev` using the naming convention that we will discuss below. 
+For development, we will have a `dev` branch that has `main` as its parent branch. For issues labeled as `enhancement`, we will create branches out from `dev` using the naming convention that we will discuss below.
 
 Note that we will *never* attempt to push any feature enhancements to `main` branch. All features will be unified and tested in `dev` branch before releasing them to `main`. Only `chore` type pull requests addressing issues in the general repository structure can be pushed directly from issue branches.
 
@@ -26,7 +26,7 @@ Here for this pipeline we have 3 major development items
 
 Each of those major development items will have individual subdirectories under `/src`.
 
-## Issues 
+## Issues
 
 Each branch will have at least one related issue. You can have address more than one issue with a branch but please try to tackle a reasonable number of issues with a single branch. It's okay for you to have/work on more than one branch.
 
