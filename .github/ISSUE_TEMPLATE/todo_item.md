@@ -2,18 +2,18 @@
 name: To-Do item
 about: Write what you will do
 title: "[TODO]"
-labels: 
-assignees: 
+labels:
+assignees:
 milestone:
 
 ---
 <!-- Welcome to a to-do issue. Please read this before creating the issue if this is your first time!!! -->
 
 <!--This is what you do to yourself. Please be as specific as possible in what you will do.
-    As the issue creator, this time you have a lot of responsibility. 
-    1- Title: Create a concise title that summarizes the core of what you will do. Please try to be as atomic as possible, do not combine multiple todo items under one ticket. 
+    As the issue creator, this time you have a lot of responsibility.
+    1- Title: Create a concise title that summarizes the core of what you will do. Please try to be as atomic as possible, do not combine multiple todo items under one ticket.
         DO NOT REMOVE [TODO] TAG!!!
-    2- Labels: Label the issue properly. Select the label according to which part of the pipeline it would go. 
+    2- Labels: Label the issue properly. Select the label according to which part of the pipeline it would go.
     3- Assignee(s): Tag yourself and anyone that you will do the specific job together.
         Also tag all the people in the correspondence section.
     4- Milestone: For which milestone are you doing this task?
