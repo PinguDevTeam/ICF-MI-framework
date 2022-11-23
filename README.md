@@ -18,3 +18,42 @@ pre-commit run --all-files
 Running the pre-commit hooks might modify the staged files.
 Run the diff command to check the changes made after which the file needs to be staged
 again and commited.
+
+## Documentation (For dev)
+This repository use Sphinx for documenting the code.
+To install sphinx and the necessary requirements run,
+
+```bash
+./scripts/configure_sphinx.sh
+```
+
+To document your function use the following docsting,
+
+```bash
+
+    """Summary line.
+
+    Extended description of function.
+
+    Note:
+        Do not include the `self` parameter in the ``Args`` section.
+
+    Args:
+        arg1 (float): Description of arg1
+        arg2 (float): Description of arg2
+
+    Returns:
+        (float): Sum of arg1 and arg2
+
+    """
+
+```
+
+Now, to update the documentation run,
+
+```
+./scripts/create_documentation.sh
+```
+from the **ROOT** of the project.
+If everything works perfectly, a a firefox window will pop-up with the documentation.
+Please verify that the desired documentation has been made.
