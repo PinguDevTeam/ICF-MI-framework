@@ -1,11 +1,13 @@
 Introduction
 ^^^^^^^^^^^^^
-**ICF-MI** combines two statistical algorithms, **TT-ICE** which is a tensor-train decomposition alogorithm and **GIM** which is a model identification alogorithm.
+**ICF-MI** combines two statistical algorithms, **TT-ICE** which is an incremental tensor-train decomposition alogorithm suitable for data streams and **GIM** which is a model identification alogorithm.
 The Algorithm has the following salient features:
 
-* **TT-ICE** is a tensor-train decomposition algorithm which is a generalization of the popular **ICE** algorithm. It is a non-parametric algorithm which can be used to decompose a high-dimensional function into a sum of low-dimensional functions.
-  It is a generalization of the popular **ICE** algorithm.
-  It is a non-parametric algorithm which can be used to decompose a high-dimensional function into a sum of low-dimensional functions.
+* **TT-ICE** is a novel incremental tensor-train (TT) decomposition algorithm which is developed to decompose high dimensional data streams into tensor-train format.
+**TT-ICE** uses orthogonal projections and sequential application of SVD to compute the missing orthogonal directions in the TT-cores.
+For a stream of d-dimensional tensors, **TT-ICE** accumulates the stream along an additional (d+1)-th dimension and trains d 3 dimensional TT-cores that span the first d dimensions of the stream.
+The (d+1)-th TT-core resulting from the decomposition process contains coefficient vectors unique to each datum.
+Within the scope of our pipeline, we will treat **TT-ICE** as a multilinear dimensionality reduction tool and use the coefficient vectors contained in the last TT-core to train the surrogate model.
 
 * **GIM** is an information-theoretic model identification algorithm which can be used to identify the model which best fits the data.
 
@@ -18,6 +20,7 @@ The Algorithm has the following salient features:
 REFERENCES:
 ===============
 * `Google <https://www.google.com>`_ , search engine has been used throughout the project.
+*  Aksoy et al., An Incremental Tensor-Train Decomposition Algorithm, 'arXiv preprint <https://arxiv.org/abs/2211.12487>'_
 *  Other kind of text ``Bold reference``.
 *  Bold **letters**.
 
