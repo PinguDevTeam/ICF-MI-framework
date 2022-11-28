@@ -15,10 +15,10 @@ from datetime import datetime
 
 
 
-def load_data(image_path,label_path): 
-    xdata=np.load(image_path) 
-    ydata=np.load(label_path)
-    return xdata, ydata
+def loadData(image_path,label_path): 
+    xData=np.load(image_path) 
+    yData=np.load(label_path)
+    return xData, yData
 
-xdata, ydata = load_data("./hurricane_image_train.npy","./hurricane_label_train.npy")
-X_train, X_test, y_train, y_test = train_test_split(xdata, ydata, test_size=0.33, random_state=42)
+xData, yData = load_data("./hurricane_image_train.npy","./hurricane_label_train.npy")
+xTrain, xTest, yTrain, yTest = train_test_split(xData, yData, test_size=0.33, random_state=42)
