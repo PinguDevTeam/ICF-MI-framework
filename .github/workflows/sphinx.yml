@@ -16,6 +16,7 @@ jobs:
         uses: ammaraskar/sphinx-action@master
         with:
           docs-folder: "docs/_build/html"
+          build-command: "sphinx-build -b html . _build"
       # - run: pip install sphinx-rtd-theme
       - name: Upload artifacts
         # uses: actions/upload-artifact@v3
@@ -24,7 +25,7 @@ jobs:
         #   path: docs/build/html/
         uses: actions/upload-pages-artifact@v1
         with:
-          path: docs/build/html
+          path: docs/_build/html
       # - name: Deploy
       #   uses: peaceiris/actions-gh-pages@v3.9.0
       #   if: github.ref== 'refs/heads/main'
