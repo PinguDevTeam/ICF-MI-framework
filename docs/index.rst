@@ -11,7 +11,7 @@ Welcome to ICF-MI's documentation!
    :caption: Introduction:
 
    introduction
-   TTICE
+   ./../src/TTICE
    LSTM
    GIM
 
