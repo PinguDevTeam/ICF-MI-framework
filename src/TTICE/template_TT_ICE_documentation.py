@@ -21,7 +21,11 @@ def templateFunction(arg1, arg2):
 
 
 def main():
-    """This is the main function (TT-ICE)"""
+    """
+    This is the main function (TT-ICE).
+    Provided that there is a multidimensional numpy array, this function converts the
+    multidimensional array into TT-format.
+    """
     print(templateFunction(1, 2))
 
 
