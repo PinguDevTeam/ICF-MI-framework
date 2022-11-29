@@ -6,7 +6,7 @@ cd docs
 echo $PWD
 
 rm `find . -name "*rst" ! -name "index.rst" ! -name "introduction.rst"`
-sphinx-apidoc -o . ../
+sphinx-apidoc -o . ../src
 make html
 make latexpdf
 firefox ./_build/html/index.html
