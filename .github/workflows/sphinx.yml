@@ -22,7 +22,7 @@ jobs:
         #   path: docs/build/html/
         uses: actions/upload-pages-artifact@v1
         with:
-          path: docs/
+          path: docs/build/html/
       # - name: Deploy
       #   uses: peaceiris/actions-gh-pages@v3.9.0
       #   if: github.ref== 'refs/heads/main'
