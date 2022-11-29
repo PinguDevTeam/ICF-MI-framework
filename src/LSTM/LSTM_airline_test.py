@@ -23,10 +23,11 @@ dataset = scaler.fit_transform(dataset)
 # split into train and test sets
 train_size = int(len(dataset) * 0.67)
 test_size = len(dataset) - train_size
-train, test = dataset[0 : train_size, :], dataset[train_size : len(dataset), :]
+train, test = dataset[0:train_size, :], dataset[train_size : len(dataset), :]
 print(len(train), len(test))
 
 # convert an array of values into a dataset matrix
+
 def create_dataset(dataset, look_back=1):
     dataX, dataY = [], []
     for i in range(len(dataset) - look_back - 1):
