@@ -16,7 +16,7 @@ jobs:
         uses: ammaraskar/sphinx-action@master
         with:
           docs-folder: "docs/"
-          build-command: "sphinx-build -b html -w /tmp/sphinx-log ./src ./docs"
+          build-command: "sphinx-build -b html -w /tmp/sphinx-log . _build"
       # - run: pip install sphinx-rtd-theme
       - name: Upload artifacts
         # uses: actions/upload-artifact@v3
