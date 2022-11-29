@@ -2,7 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import tensorflow as tf
-from tensorflow import keras
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import LSTM
@@ -77,8 +76,9 @@ trainPredictPlot[look_back : len(trainPredict) + look_back, :] = trainPredict
 # shift test predictions for plotting
 testPredictPlot = np.empty_like(dataset)
 testPredictPlot[:, :] = np.nan
-testPredictPlot[len(trainPredict) + (look_back * 2) + 1 \
-    : len(dataset) - 1, :] = testPredict
+testPredictPlot[
+    len(trainPredict) + (look_back * 2) + 1 : len(dataset) - 1, :
+] = testPredict
 # plot baseline and predictions
 plt.plot(scaler.inverse_transform(dataset))
 plt.plot(trainPredictPlot)
