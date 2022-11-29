@@ -72,8 +72,22 @@ for i in range(len(xIms[0:10])):
     for j in range(len(xTimes)):
         for k in range(len(xParams)):
             # date = datetime.now().strftime("%Y_%m_%d-%I:%M:%S_%p")
-            imNameh ="hurricane_image"+ "_"+ "time"+ "_"+ str(j) + "_"+ "image"+ "_"+ str(i)+ "_"+ "parameter"+ "_"+ str(k)+ ".png"
-
+            imNameh = (
+                "hurricane_image"
+                + "_"
+                + "time"
+                + "_"
+                + str(j)
+                + "_"
+                + "image"
+                + "_"
+                + str(i)
+                + "_"
+                + "parameter"
+                + "_"
+                + str(k)
+                + ".png"
+            )
             completeNameh = os.path.join(savePathh, imNameh)
         # I = imageGen(x,xIms[i],xTimes[j],xParams[k])
 
@@ -96,3 +110,7 @@ for i in range(len(yIms[0:10])):
         I = probMap(y, yIms[i], yTimes[j])
         plt.show
         plt.savefig(completeNamep, dpi=600)
+
+
+#%%
+X_train, X_test, y_train, y_test = train_test_split(xData, yData, test_size=0.33, random_state=42)
