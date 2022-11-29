@@ -28,6 +28,7 @@ print(len(train), len(test))
 
 # convert an array of values into a dataset matrix
 
+
 def create_dataset(dataset, look_back=1):
     dataX, dataY = [], []
     for i in range(len(dataset) - look_back - 1):
