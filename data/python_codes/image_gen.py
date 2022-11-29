@@ -33,7 +33,7 @@ def loadData(image_path, label_path):
 def imageGen(xdata, idx1, idx2, idx3):
     # this function takes the data from
     # loadData and generates the images
-    x = xdata.reshape(3408, 10, 128, 257, 6)
+    #x = xdata.reshape(3408, 10, 128, 257, 6)
     img_contour = plt.contourf(x[int(idx1), int(idx2), :, :, int(idx3)])
     return img_contour
 
@@ -41,7 +41,7 @@ def imageGen(xdata, idx1, idx2, idx3):
 def probMap(ydata, idx1, idx2):
     # this function generates the probablilty contour that
     # a hurricane is located in a specific pixel
-    y = ydata.reshape(3408, 10, 128, 257, 1)
+   # y = ydata.reshape(3408, 10, 128, 257, 1)
     prob_contour = plt.contourf(y[int(idx1), int(idx2), :, :, 0])
     return prob_contour
 
