@@ -72,27 +72,13 @@ for i in range(len(xIms[0:10])):
     for j in range(len(xTimes)):
         for k in range(len(xParams)):
             # date = datetime.now().strftime("%Y_%m_%d-%I:%M:%S_%p")
-            imNameh = (
-                "hurricane_image"
-                + "_"
-                + "time"
-                + "_"
-                + str(j)
-                + "_"
-                + "image"
-                + "_"
-                + str(i)
-                + "_"
-                + "parameter"
-                + "_"
-                + str(k)
-                + ".png"
-            )
+            imNameh = "hurricane_image"+ "_"+ "time"+ "_"+ str(j)+ "_"+ "image"+ "_"+ str(i)+ "_"+ "parameter"+ "_"+ str(k)+ ".png"
+            
             completeNameh = os.path.join(savePathh, imNameh)
-        # I = imageGen(x,xIms[i],xTimes[j],xParams[k])
+            I = imageGen(x,xIms[i],xTimes[j],xParams[k])
 
-#          plt.show
-#           plt.savefig(completeNameh,dpi =1080)
+           plt.show
+           plt.savefig(completeNameh,dpi =1080)
 #
 #%%
 # define path to save the probabilitys to
@@ -113,4 +99,4 @@ for i in range(len(yIms[0:10])):
 
 
 #%%
-X_train, X_test, y_train, y_test = train_test_split(xData, yData, test_size=0.33, random_state=42)
+
