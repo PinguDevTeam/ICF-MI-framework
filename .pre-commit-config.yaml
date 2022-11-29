@@ -14,7 +14,7 @@ repos:
     - id: check-merge-conflict
 
 -   repo: https://github.com/ambv/black
-    rev: 22.3.0
+    rev: 22.10.0
     hooks:
     - id: black
       language: python
@@ -25,7 +25,7 @@ repos:
     rev: 5.0.4
     hooks:
     - id: flake8
-      args: ["--max-line-length=88"]
+      args: ["--max-line-length=88", "--extend-ignore=E203", "--doctests"]
 
 -   repo: https://github.com/pre-commit/mirrors-clang-format
     rev: v14.0.6
