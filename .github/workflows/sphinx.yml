@@ -19,10 +19,11 @@ jobs:
           build-command: "sphinx-build -b html -w /tmp/sphinx-log . _build"
       # - run: pip install sphinx-rtd-theme
       - name: Upload artifacts
-        # uses: actions/upload-artifact@v3
-        # with:
-        #   name: html-docs
-        #   path: docs/build/html/
+        uses: actions/upload-artifact@v3
+        with:
+          name: html-docs
+          path: docs/_build/html
+      - name: Publish page
         uses: actions/upload-pages-artifact@v1
         with:
           path: docs/_build/html
