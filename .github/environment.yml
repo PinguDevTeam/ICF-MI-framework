@@ -1,0 +1,5 @@
+name: autoDoc-env
+dependencies:
+  - python>=3.8
+  - pip
+  - sphinx-rtd-theme
