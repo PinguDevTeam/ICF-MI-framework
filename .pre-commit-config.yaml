@@ -14,7 +14,7 @@ repos:
     - id: check-merge-conflict
 
 -   repo: https://github.com/ambv/black
-    rev: 22.3.0
+    rev: 22.10.0
     hooks:
     - id: black
       language: python
