@@ -12,9 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: pip install sphinx-rtd-theme
       - name: Build HTML
         uses: ammaraskar/sphinx-action@0.4
+      - run: pip install sphinx-rtd-theme
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
