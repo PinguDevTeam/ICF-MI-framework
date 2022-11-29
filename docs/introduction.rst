@@ -20,7 +20,7 @@ Within the scope of our pipeline, we will treat **TT-ICE** as a multilinear dime
 REFERENCES:
 ===============
 * `Google <https://www.google.com>`_ , search engine has been used throughout the project.
-*  Aksoy et al., An Incremental Tensor-Train Decomposition Algorithm, 'arXiv preprint <https://arxiv.org/abs/2211.12487>'_
+*  Aksoy et al., An Incremental Tensor-Train Decomposition Algorithm, `arXiv preprint <https://arxiv.org/abs/2211.12487>`_
 *  Other kind of text ``Bold reference``.
 *  Bold **letters**.
 
