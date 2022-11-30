@@ -15,11 +15,17 @@ jobs:
         run : ./scripts/configure_sphinx.sh
       - name: Build source code
         run: ./scripts/create_documentation.sh
-      - name: Upload artifacts
+      - name: Create artifacts
         uses: actions/upload-artifact@v3
         with:
           name: html-docs
           path: docs/_build/html
+      - name: Upload
+        uses: peaceiris/actions-gh-pages@v3.9.0
+        if: github.ref== 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/build/htm
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -64,14 +70,14 @@ jobs:
 #       #     github_token: ${{ secrets.GITHUB_TOKEN }}
 #       #     publish_dir: docs/build/html
 #   deploy:
-#     needs: build
-#     runs-on: ubuntu-latest
-#     permissions:
-#       pages: write
-#       id-token: write
-#     environment:
-#       name: github-pages
-#       url: ${{ steps.deployment.outputs.page_url }}
-#     steps:
-#       - id: deployment
-#         uses: actions/deploy-pages@v1
+# #     needs: build
+# #     runs-on: ubuntu-latest
+# #     permissions:
+# #       pages: write
+# #       id-token: write
+# #     environment:
+# #       name: github-pages
+# #       url: ${{ steps.deployment.outputs.page_url }}
+# #     steps:
+# #       - id: deployment
+# #         uses: actions/deploy-pages@v1
