@@ -13,6 +13,7 @@ jobs:
       - uses: ammaraskar/sphinx-action@master
         with:
           docs-folder: "docs/"
+          pre-build-commad: 'rm find . -name "*rst" ! -name "index.rst" ! -name "introduction.rst"'
 # jobs:
 #   build:
 #     runs-on: ubuntu-latest
