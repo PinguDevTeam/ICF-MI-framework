@@ -3,7 +3,7 @@ name: Code Documentation
 on:
   pull_request:
   push:
-    branches: [main, dev, feat/doruk/31]
+    branches: [main, dev]
 
 jobs:
   docs:
@@ -13,9 +13,7 @@ jobs:
       - uses: ammaraskar/sphinx-action@master
         with:
           docs-folder: "docs/"
-          pre-build-command: |
-            'rm find . -name "*rst" ! -name "index.rst" ! -name "introduction.rst"'
-            'sphinx-apidoc -o . ../src'
+          pre-build-command: 'rm find . -name "*rst" ! -name "index.rst" ! -name "introduction.rst" && sphinx-apidoc -o . ../src'
 
 # jobs:
 #   build:
