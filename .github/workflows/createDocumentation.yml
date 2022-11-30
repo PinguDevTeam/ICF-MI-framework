@@ -6,7 +6,7 @@ on:
     branches: [main, dev]
 
 jobs:
-  docs:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -15,11 +15,12 @@ jobs:
         run : ./scripts/configure_sphinx.sh
       - name: Build source code
         run: ./scripts/create_documentation.sh
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: html-docs
+          path: docs/_build/html
 
-      # - uses: ammaraskar/sphinx-action@master
-      #   with:
-      #     docs-folder: "docs/"
-      #     # 'rm find . -name "*rst" ! -name "index.rst" ! -name "introduction.rst" && sphinx-apidoc -o . ../src'
 
 # jobs:
 #   build:
