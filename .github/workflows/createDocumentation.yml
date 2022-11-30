@@ -13,7 +13,7 @@ jobs:
       - name: Build source code
         run: |
           cd docs
-          rm find . -name "*rst" ! -name "index.rst" ! -name "introduction.rst"
+          rm `find . -name "*rst" ! -name "index.rst" ! -name "introduction.rst"`
           sphinx-apidoc -o . ../src'
       # - uses: ammaraskar/sphinx-action@master
       #   with:
