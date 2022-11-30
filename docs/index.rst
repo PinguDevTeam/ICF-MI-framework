@@ -11,9 +11,6 @@ Welcome to ICF-MI's documentation!
    :caption: Introduction:
 
    introduction
-   ./../src/TTICE/TTICE
-   LSTM
-   GIM
 
 .. toctree::
    :maxdepth: 2
