@@ -1,51 +1,57 @@
-name: Sphinx build
+name: Code Documentation
 
 on:
+  pull_request:
   push:
-    branches:
-      - main
-      - dev
-      - feat/doruk/31 #Temporarily placed to test the documentation on feature branch
+    branches: [main, dev, feat/doruk/31]
 
 jobs:
-  build:
+  docs:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Build HTML
-        uses: ammaraskar/sphinx-action@master
+      - uses: actions/checkout@v1
+      - uses: ammaraskar/sphinx-action@master
         with:
           docs-folder: "docs/"
-          # build-command: "sphinx-build -b html -w /tmp/sphinx-log . _build/html"
-          run: |
-            "sphinx-apidoc -o . ../src"
-            "make html"
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v3
+#       - name: Build HTML
+#         uses: ammaraskar/sphinx-action@master
+#         with:
+#           docs-folder: "docs/"
+#           # build-command: "sphinx-build -b html -w /tmp/sphinx-log . _build/html"
+#           run: |
+#             "sphinx-apidoc -o . ../src"
+#             "make html"
 
-      # - run: pip install sphinx-rtd-theme
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: html-docs
-          path: docs/_build/html
-      - name: Publish page
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: docs/_build/html
-      # - name: Deploy
-      #   uses: peaceiris/actions-gh-pages@v3.9.0
-      #   if: github.ref== 'refs/heads/main'
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     publish_dir: docs/build/html
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v1
+#       # - run: pip install sphinx-rtd-theme
+#       - name: Upload artifacts
+#         uses: actions/upload-artifact@v3
+#         with:
+#           name: html-docs
+#           path: docs/_build/html
+#       - name: Publish page
+#         uses: actions/upload-pages-artifact@v1
+#         with:
+#           path: docs/_build/html
+#       # - name: Deploy
+#       #   uses: peaceiris/actions-gh-pages@v3.9.0
+#       #   if: github.ref== 'refs/heads/main'
+#       #   with:
+#       #     github_token: ${{ secrets.GITHUB_TOKEN }}
+#       #     publish_dir: docs/build/html
+#   deploy:
+#     needs: build
+#     runs-on: ubuntu-latest
+#     permissions:
+#       pages: write
+#       id-token: write
+#     environment:
+#       name: github-pages
+#       url: ${{ steps.deployment.outputs.page_url }}
+#     steps:
+#       - id: deployment
+#         uses: actions/deploy-pages@v1
