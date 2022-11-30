@@ -10,11 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+      - uses: actions/setup-python@v3
+      - name: Install dependancies
+        run : ./scripts/configure_sphinx.sh
       - name: Build source code
-        run: |
-          cd docs
-          rm `find . -name "*rst" ! -name "index.rst" ! -name "introduction.rst"`
-          sphinx-apidoc -o . ../src'
+        run: ./scripts/create_documentation.sh
+
       # - uses: ammaraskar/sphinx-action@master
       #   with:
       #     docs-folder: "docs/"
