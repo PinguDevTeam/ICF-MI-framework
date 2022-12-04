@@ -3,10 +3,10 @@
 # Run this script from the root of the project.
 
 cd docs
-echo $PWD
+# echo $PWD
 
 rm `find . -name "*rst" ! -name "index.rst" ! -name "introduction.rst"`
 sphinx-apidoc -o . ../src
 make html
-make latexpdf
-firefox ./_build/html/index.html
+# make latexpdf
+# firefox ./_build/html/index.html

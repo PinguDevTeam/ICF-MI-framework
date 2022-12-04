@@ -1,0 +1,33 @@
+name: Code Documentation
+
+on:
+  pull_request:
+  push:
+    branches: [main, dev]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-python@v3
+      - name: Install dependancies
+        run : ./scripts/configure_sphinx.sh
+      - name: Build source code
+        run: ./scripts/create_documentation.sh
+      - name: Commit changes
+        run: |
+          cd docs/_build/html
+          git init
+          touch .nojekyll
+          git add -A
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -m 'deploy'
+      - name: Force push
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          force: true
+          directory: ./docs/_build/html
