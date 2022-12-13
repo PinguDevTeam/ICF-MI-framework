@@ -20,10 +20,14 @@ def templateFunction(arg1, arg2):
     return m
 
 
-def main():
-    """This is the main function (TT-ICE)"""
-    print(templateFunction(1, 2))
-
-
-if __name__ == "__main__":
-    main()
+class main:
+    def __init__(
+        self,
+        data,
+        epsilon: float = None,
+        keepData: bool = False,
+        samplesAlongLastDimension: bool = True,
+        method: str = "ttsvd",
+    ):
+        """This is the main function (TTICE)"""
+        print(templateFunction(1, 2))

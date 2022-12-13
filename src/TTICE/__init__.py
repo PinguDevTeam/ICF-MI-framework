@@ -1,11 +1,12 @@
-def testFcn(a):
-    """This is a test function to check if docstrings are working
+"""
+Welcome to TTICE documentation!
 
-    Args:
-        a (float): random value
+This python package currently offers support for multidimensional tensors
+in Tensor-Train format.We use the TT-SVD algorithm proposed by Ivan Oseledets
+and TT-ICE algorithm proposed by Doruk Aksoy.
 
-    Returns:
-        (float): input plus 2
-    """
-    a += 2
-    return a
+In future releases, the coverage may be extended to other tensor decomposition formats
+such as CP and/or Tucker.
+"""
+
+from .ttObject import ttObject  # noqa: F401
