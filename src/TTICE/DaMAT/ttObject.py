@@ -11,6 +11,8 @@ import warnings
 
 import numpy as np
 
+from pickle import dump
+
 
 class ttObject:
     """
@@ -225,3 +227,57 @@ class ttObject:
         self.indexOrder = [self.indexOrder[idx] for idx in newOrder]
         self.originalData = self.originalData.transpose(newOrder)
         self.reshapedShape = list(self.originalData.shape)
+
+    def saveData(
+        self, fileName: str, directory="./", justCores=True, outputType="ttc"
+    ) -> None:
+        """
+        Writes the computed TT-cores to an external file.
+
+        Parameters
+        ----------
+        fileName:obj:`str`
+
+        directory:obj:`str`
+            Location to save files with respect to the present working directory.
+        justCores:obj:`bool`
+            Boolean variable to determine if `originalData` will be discarded
+            or not while saving.
+        outputType:obj:`str`
+            Type of the output file. `ttc` for pickled `ttObject`, `txt` for
+            individual text files for each TT-core.
+        """
+        if justCores:
+            if outputType == "ttc":
+                with open(directory + fileName + ".ttc", "wb") as saveFile:
+                    temp = ttObject(self.ttCores)
+                    for attribute in vars(self):
+                        if attribute != "originalData":
+                            setattr(temp, attribute, eval(f"self.{attribute}"))
+                    dump(temp, saveFile)
+            elif outputType == "txt":
+                for coreIdx, core in enumerate(self.ttCores):
+                    np.savetxt(
+                        directory + f"{fileName}_{coreIdx}.txt",
+                        core.reshape(-1, core.shape[-1]),
+                        header=f"{core.shape[0]} {core.shape[1]} {core.shape[2]}",
+                        delimiter=" ",
+                    )
+            elif outputType == "npy":
+                for coreIdx, core in enumerate(self.ttCores):
+                    np.save(
+                        directory + f"{fileName}_{coreIdx}.npy",
+                        core,
+                    )
+            else:
+                raise ValueError(f"Output type {outputType} is not supported!")
+        else:
+            if outputType == "txt":
+                raise ValueError(
+                    ".txt type outputs are only supported for justCores=True!!"
+                )
+            if self.method == "ttsvd":
+                with open(directory + fileName + ".ttc", "wb") as saveFile:
+                    dump(self, saveFile)
+            else:
+                raise ValueError("Unknown Method!")
