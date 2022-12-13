@@ -142,3 +142,16 @@ class ttObject:
                 "No TT cores exist, maybe forgot calling object.ttDecomp?", Warning
             )
             return None
+
+    @property
+    def compressionRatio(self) -> float:
+        """
+        :obj:`float`: A metric showing how much compression with respect to the
+        original multidimensional array is achieved.
+        """
+        originalNumEl = 1
+        compressedNumEl = 0
+        for core in self.ttCores:
+            originalNumEl *= core.shape[1]
+            compressedNumEl += np.prod(core.shape)
+        return originalNumEl / compressedNumEl
