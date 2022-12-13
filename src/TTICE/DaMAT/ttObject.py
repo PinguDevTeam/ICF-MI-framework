@@ -155,3 +155,43 @@ class ttObject:
             originalNumEl *= core.shape[1]
             compressedNumEl += np.prod(core.shape)
         return originalNumEl / compressedNumEl
+
+    def changeShape(self, newShape: tuple or list) -> None:
+        """
+        Function to change shape of input tensors and keeping track of the reshaping.
+        Reshapes `originalData` and saves the final shape in `reshapedShape`
+
+        Note
+        ----
+        A simple `numpy.reshape` would be sufficient for this purpose but in order to
+        keep track of the shape changes the `reshapedShape` attribute also needs to be
+        updated accordingly.
+
+        Parameters
+        ----------
+        newShape:obj:`tuple` or `list`
+            New shape of the tensor
+
+        Raises
+        ------
+        warning
+            If an attempt is done to modify the shape after computing a
+            TT-decomposition.
+            This is important since it will cause incompatibilities in other functions
+            regarding the shape of the uncompressed tensor.
+
+        """
+        if self.ttCores is not None:
+            warnings.warning(
+                "Warning! You are reshaping the original data after computing a\
+                TT-decomposition! We will proceed without reshaping self.originalData!!"
+            )
+            return None
+        self.reshapedShape = newShape
+        self.originalData = np.reshape(self.originalData, self.reshapedShape)
+        self.reshapedShape = list(self.originalData.shape)
+        # Changed reshapedShape to a list for the trick in ttICEstar
+        if self.samplesAlongLastDimension:
+            self.singleDataShape = self.reshapedShape[:-1]
+            # This line assumes we keep the last index as the samples index and don't
+            # interfere with its shape
