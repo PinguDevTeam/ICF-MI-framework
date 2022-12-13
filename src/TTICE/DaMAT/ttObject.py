@@ -12,7 +12,7 @@ import time
 
 import numpy as np
 
-from .utils import ttsvd
+from .utils import ttsvd, deltaSVD
 from pickle import dump, load
 
 
@@ -525,3 +525,101 @@ class ttObject:
             return None
         else:
             raise ValueError("Method unknown. Please select a valid method!")
+
+    def ttICE(self, newTensor, epsilon=None, tenNorm=None) -> None:
+        """
+        `TT-ICE`_ algorithmn without any heuristic upgrades.
+
+        Given a set of TT-cores, this function provides incremental updates
+        to the TT-cores to approximate `newTensor` within a relative error
+        defined in `epsilon`
+
+        Note
+        ----
+        This algorithm/function relies on the fact that TT-cores are columnwise
+        orthonormal in the mode-2 unfolding.
+
+        Parameters
+        ----------
+        newTensor:obj:`np.array`
+            New/streamed tensor that will be used to expand the orthonormal bases
+            defined in TT-cores
+        epsilon:obj:`float`, optional
+            Relative error upper bound for approximating `newTensor` after incremental
+            updates. If not defined, `ttObject.ttEpsilon` is used.
+        tenNorm:obj:`float`, optional
+            Norm of `newTensor`
+
+        Notes
+        -------
+        **The following attributes are modified as a result of this function:**
+        - `ttObject.ttCores`
+        - `ttObject.ttRanks`
+        - `ttObject.compressionRatio`
+        .. _TT-ICE:
+            https://arxiv.org/abs/2211.12487
+        """
+        if tenNorm is None:
+            tenNorm = np.linalg.norm(newTensor)
+        if epsilon is None:
+            epsilon = self.ttEpsilon
+        newTensorSize = len(newTensor.shape) - 1
+        newTensor = newTensor.reshape(list(self.reshapedShape[:-1]) + [-1])[None, :]
+        newTensor = newTensor.reshape(self.reshapedShape[0], -1)
+        Ui = self.ttCores[0].reshape(self.reshapedShape[0], -1)
+        Ri = newTensor - Ui @ (Ui.T @ newTensor)
+        for coreIdx in range(0, len(self.ttCores) - 2):
+            URi, _, _ = deltaSVD(Ri, tenNorm, newTensorSize, epsilon)
+            self.ttCores[coreIdx] = np.hstack((Ui, URi)).reshape(
+                self.ttCores[coreIdx].shape[0], self.reshapedShape[coreIdx], -1
+            )
+            self.ttCores[coreIdx + 1] = np.concatenate(
+                (
+                    self.ttCores[coreIdx + 1],
+                    np.zeros(
+                        (
+                            URi.shape[-1],
+                            self.reshapedShape[coreIdx + 1],
+                            self.ttRanks[coreIdx + 2],
+                        )
+                    ),
+                ),
+                axis=0,
+            )
+            Ui = self.ttCores[coreIdx].reshape(
+                self.ttCores[coreIdx].shape[0] * self.reshapedShape[coreIdx], -1
+            )
+            newTensor = (Ui.T @ newTensor).reshape(
+                np.prod(self.ttCores[coreIdx + 1].shape[:-1]), -1
+            )
+            Ui = self.ttCores[coreIdx + 1].reshape(
+                self.ttCores[coreIdx].shape[-1] * self.reshapedShape[coreIdx + 1], -1
+            )
+            Ri = newTensor - Ui @ (Ui.T @ newTensor)
+        coreIdx = len(self.ttCores) - 2
+        URi, _, _ = deltaSVD(Ri, tenNorm, newTensorSize, epsilon)
+        self.ttCores[coreIdx] = np.hstack((Ui, URi))
+        self.ttCores[coreIdx + 1] = np.concatenate(
+            (
+                self.ttCores[coreIdx + 1],
+                np.zeros(
+                    (
+                        URi.shape[-1],
+                        self.ttCores[coreIdx + 1].shape[1],
+                        self.ttRanks[coreIdx + 2],
+                    )
+                ),
+            ),
+            axis=0,
+        )
+        newTensor = self.ttCores[coreIdx].T @ newTensor
+        self.ttCores[coreIdx] = self.ttCores[coreIdx].reshape(
+            self.ttCores[coreIdx - 1].shape[-1], self.reshapedShape[coreIdx], -1
+        )
+        coreIdx += 1
+        Ui = self.ttCores[coreIdx].reshape(self.ttCores[coreIdx].shape[0], -1)
+        self.ttCores[coreIdx] = np.hstack((Ui, newTensor)).reshape(
+            self.ttCores[coreIdx].shape[0], -1, 1
+        )
+        self.updateRanks()
+        return None
