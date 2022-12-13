@@ -1,5 +1,5 @@
 """
-Welcome to DaMAT package documentation!
+Welcome to TTICE documentation!
 
 
 This python package currently offers support for multidimensional tensors

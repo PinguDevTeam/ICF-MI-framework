@@ -2,7 +2,7 @@ import os
 import time
 
 import numpy as np
-import DaMAT as dmt
+import TTICE as ttice
 
 method = "ttsvd"
 heuristics = ["skip", "occupancy"]
@@ -49,7 +49,7 @@ for runIdx in range(nTrainingRuns):
     if runIdx == 0:
         # I'm checking here if we are at the first run. Please modify this if
         # statement accordingly
-        dataSet = dmt.ttObject(
+        dataSet = ttice.ttObject(
             data[:, :, :, stIdx][:, :, :, None],
             epsilon=epsilon,
             keepData=False,
