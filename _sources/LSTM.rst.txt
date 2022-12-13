@@ -1,0 +1,21 @@
+LSTM package
+============
+
+Submodules
+----------
+
+LSTM.template\_LSTM\_documentation module
+-----------------------------------------
+
+.. automodule:: LSTM.template_LSTM_documentation
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: LSTM
+   :members:
+   :undoc-members:
+   :show-inheritance:

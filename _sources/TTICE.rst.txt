@@ -1,0 +1,37 @@
+TTICE package
+=============
+
+Submodules
+----------
+
+TTICE.test\_TTICE\_documentation module
+---------------------------------------
+
+.. automodule:: TTICE.test_TTICE_documentation
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+TTICE.ttObject module
+---------------------
+
+.. automodule:: TTICE.ttObject
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+TTICE.utils module
+------------------
+
+.. automodule:: TTICE.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: TTICE
+   :members:
+   :undoc-members:
+   :show-inheritance:

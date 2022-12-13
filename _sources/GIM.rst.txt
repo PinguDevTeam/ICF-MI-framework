@@ -1,0 +1,21 @@
+GIM package
+===========
+
+Submodules
+----------
+
+GIM.template\_GIM\_documentation module
+---------------------------------------
+
+.. automodule:: GIM.template_GIM_documentation
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: GIM
+   :members:
+   :undoc-members:
+   :show-inheritance:

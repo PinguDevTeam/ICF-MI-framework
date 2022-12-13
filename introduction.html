@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction &mdash; ICF-MI 0.0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="src" href="modules.html" />
+    <link rel="prev" title="Welcome to ICF-MI’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> ICF-MI
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Introduction:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#references">REFERENCES:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#developers">Developers:</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">src</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ICF-MI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/introduction.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h1>
+<p><strong>ICF-MI</strong> combines two statistical algorithms, <strong>TT-ICE</strong> which is an incremental tensor-train decomposition alogorithm suitable for data streams and <strong>GIM</strong> which is a model identification alogorithm.
+The Algorithm has the following salient features:</p>
+<ul class="simple">
+<li><p><strong>TT-ICE</strong> is a novel incremental tensor-train (TT) decomposition algorithm which is developed to decompose high dimensional data streams into tensor-train format.</p></li>
+</ul>
+<p><strong>TT-ICE</strong> uses orthogonal projections and sequential application of SVD to compute the missing orthogonal directions in the TT-cores.
+For a stream of d-dimensional tensors, <strong>TT-ICE</strong> accumulates the stream along an additional (d+1)-th dimension and trains d 3 dimensional TT-cores that span the first d dimensions of the stream.
+The (d+1)-th TT-core resulting from the decomposition process contains coefficient vectors unique to each datum.
+Within the scope of our pipeline, we will treat <strong>TT-ICE</strong> as a multilinear dimensionality reduction tool and use the coefficient vectors contained in the last TT-core to train the surrogate model.</p>
+<ul class="simple">
+<li><p><strong>GIM</strong> is an information-theoretic model identification algorithm which can be used to identify the model which best fits the data.</p></li>
+<li><p><strong>ICF-MI</strong> is a combination of <strong>TT-ICE</strong> and <strong>GIM</strong> and can therefore be used to identify the model parameter in a cost efficient manner.</p></li>
+</ul>
+<section id="references">
+<h2>REFERENCES:<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.google.com">Google</a> , search engine has been used throughout the project.</p></li>
+<li><p>Aksoy et al., An Incremental Tensor-Train Decomposition Algorithm, <a class="reference external" href="https://arxiv.org/abs/2211.12487">arXiv preprint</a></p></li>
+<li><p>Other kind of text <code class="docutils literal notranslate"><span class="pre">Bold</span> <span class="pre">reference</span></code>.</p></li>
+<li><p>Bold <strong>letters</strong>.</p></li>
+</ul>
+</section>
+<section id="developers">
+<h2>Developers:<a class="headerlink" href="#developers" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line">Sahil Bhola (University of Michgan, Ann Arbor)</div>
+<div class="line">Doruk Aksoy (University of Michgan, Ann Arbor)</div>
+<div class="line">Carleen McKenna (University of Michgan, Ann Arbor)</div>
+<div class="line">Codie Kawaguchi (University of Michgan, Ann Arbor)</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to ICF-MI’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="modules.html" class="btn btn-neutral float-right" title="src" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Sahil Bhola.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
