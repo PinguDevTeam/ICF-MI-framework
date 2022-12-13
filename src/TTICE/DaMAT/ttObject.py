@@ -8,9 +8,11 @@ Furthermore, this object allows exporting and importing TT-cores using native
 format (`.ttc`) and intermediary formats (`.txt`).
 """
 import warnings
+import time
 
 import numpy as np
 
+from .utils import ttsvd
 from pickle import dump, load
 
 
@@ -475,3 +477,51 @@ class ttObject:
             diffNorm = np.linalg.norm(diffNorm, axis=0)
         recError = diffNorm / elementwiseNorm
         return recError
+
+    def ttDecomp(self, norm=None, dtype=np.float32) -> "ttObject.ttCores":
+        """
+        Computes TT-decomposition of a multidimensional array using `TTSVD`_ algorithm.
+
+        Currently only supports `ttsvd` as method. In the future additional formats may
+        be covered.
+
+        Parameters
+        ----------
+        norm:obj:`float`, optional
+            Norm of the tensor to be compressed
+        dtype:obj:`type`, optional
+            Desired data type for the compression. Intended to allow lower precision
+            if needed.
+
+        Raises
+        ------
+        ValueError
+            When `method` is not one of the admissible methods.
+
+
+        The following attributes are modified as a result of this function:
+        -------
+        - `ttObject.ttCores`
+        - `ttObject.ttRanks`
+        - `ttObject.compressionRatio`
+
+        .. _TTSVD:
+            https://epubs.siam.org/doi/epdf/10.1137/090752286
+        """
+        if norm is None:
+            norm = np.linalg.norm(self.originalData)
+        if self.method == "ttsvd":
+            startTime = time.time()
+            self.ttRanks, self.ttCores = ttsvd(
+                self.originalData, norm, self.ttEpsilon, dtype=dtype
+            )
+            self.compressionTime = time.time() - startTime
+            self.nCores = len(self.ttCores)
+            self.nElements = 0
+            for cores in self.ttCores:
+                self.nElements += np.prod(cores.shape)
+            if not self.keepOriginal:
+                self.originalData = None
+            return None
+        else:
+            raise ValueError("Method unknown. Please select a valid method!")
