@@ -75,16 +75,13 @@ class ttObject:
         samplesAlongLastDimension: bool = True,
         method: str = "ttsvd",
     ) -> None:
-        """
-        Initializes the ttObject.
+        """Initializes the ttObject.
 
-        Parameters
-        ----------
-        data: :obj:`numpy.array` or :obj:`list`
-            Main input to the ttObject. It can either be a multidimensional
-            `numpy array` or `list of numpy arrays`.
-            If list of numpy arrays are presented as input, the object will interpret it
-            as the TT-cores of an existing decomposition.
+        Params:
+            data (numpy.array or list): Main input to the ttObject. It can either be a
+                multidimensional `numpy array` or `list of numpy arrays`. If list of
+                numpy arrays are presented as input, the object will interpret it as
+                the TT-cores of an existing decomposition.
         epsilon: :obj:`float`, optional
             The relative error upper bound desired for approximation. Optional for cases
             when `data` has type `list`.
@@ -163,16 +160,13 @@ class ttObject:
         Function to change shape of input tensors and keeping track of the reshaping.
         Reshapes `originalData` and saves the final shape in `reshapedShape`
 
-        Note
-        ----
-        A simple `numpy.reshape` would be sufficient for this purpose but in order to
-        keep track of the shape changes the `reshapedShape` attribute also needs to be
-        updated accordingly.
+        Note:
+            A simple `numpy.reshape` would be sufficient for this purpose but in order
+            to keep track of the shape changes the `reshapedShape` attribute also needs
+            to be updated accordingly.
 
-        Parameters
-        ----------
-        newShape:obj:`tuple` or `list`
-            New shape of the tensor
+        Params:
+            newShape (tuple or list): New shape of the tensor
 
         Raises
         ------
