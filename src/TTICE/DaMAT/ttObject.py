@@ -623,3 +623,180 @@ class ttObject:
         )
         self.updateRanks()
         return None
+
+    def ttICEstar(
+        self,
+        newTensor: np.array,
+        epsilon: float = None,
+        tenNorm: float = None,
+        elementwiseNorm: np.array = None,
+        elementwiseEpsilon: np.array = None,
+        heuristicsToUse: list = ["skip", "subselect", "occupancy"],
+        occupancyThreshold: float = 0.8,
+        simpleEpsilonUpdate: bool = False,
+    ) -> None:
+        """
+        `TT-ICE*`_ algorithmn with heuristic performance upgrades.
+
+        Given a set of TT-cores, this function provides incremental updates
+        to the TT-cores to approximate `newTensor` within a relative error
+        defined in `epsilon`.
+
+        Note
+        ----
+        This algorithm/function relies on the fact that TT-cores are columnwise
+        orthonormal in the mode-2 unfolding.
+
+        Parameters
+        ----------
+        newTensor:obj:`np.array`
+            New/streamed tensor that will be used to expand the orthonormal bases
+            defined in TT-cores
+        epsilon:obj:`float`, optional
+            Relative error upper bound for approximating `newTensor` after incremental
+            updates. If not defined, `ttObject.ttEpsilon` is used.
+        tenNorm:obj:`float`, optional
+            Norm of `newTensor`.
+        elementwiseNorm:obj:`np.array`, optional
+            Individual norms of the observations in `newTensor`.
+        elementwiseEpsilon:obj:`np.array`, optional
+            Individual relative projection errors of the observations in `newTensor`.
+        heuristicsToUse:obj:`list`, optional
+            List of heuristics to use while updating TT-cores. Currently only accepts
+            `'skip'`, `'subselect'`, and `'occupancy'`.
+        occupancyThreshold:obj:`float`, optional
+            Threshold determining whether to skip updating a single core or not. Not
+            used if `'occupancy'` is not in `heuristicsToUse`
+        simpleEpsilonUpdate:obj:`bool`, optional
+            Uses the simple epsilon update equation. *Warning*: this relies on the
+            assumption that all observations in `newTensor` have similar norms.
+
+        Notes
+        -------
+        **The following attributes are modified as a result of this function:**
+        - `ttObject.ttCores`
+        - `ttObject.ttRanks`
+        - `ttObject.compressionRatio`
+        .. _TT-ICE*:
+            https://arxiv.org/abs/2211.12487
+        """
+        if epsilon is None:
+            epsilon = self.ttEpsilon
+        if ("subselect" in heuristicsToUse) and (newTensor.shape[-1] == 1):
+            warnings.warning(
+                "The streamed tensor has only 1 observation in it. \
+                    Subselect heuristic will not be useful!!"
+            )
+        newTensor = newTensor.reshape(list(self.reshapedShape[:-1]) + [-1])[None, :]
+        updEpsilon = epsilon
+        newTensorSize = len(newTensor.shape) - 1
+
+        if elementwiseEpsilon is None:
+            elementwiseEpsilon = self.computeRelError(newTensor)
+        if "skip" in heuristicsToUse:
+            if np.mean(elementwiseEpsilon) <= epsilon:
+                newTensor = self.projectTensor(newTensor)
+                self.ttCores[-1] = np.hstack(
+                    (self.ttCores[-1].reshape(self.ttRanks[-2], -1), newTensor)
+                ).reshape(self.ttRanks[-2], -1, 1)
+                return None
+        if tenNorm is None and elementwiseNorm is None:
+            tenNorm = np.linalg.norm(newTensor)
+        elif tenNorm is None:
+            tenNorm = np.linalg.norm(elementwiseNorm)
+
+        select = [True] * newTensor.shape[-1]
+        discard = [False] * newTensor.shape[-1]
+        if "subselect" in heuristicsToUse:
+            select = elementwiseEpsilon > epsilon
+            discard = elementwiseEpsilon <= epsilon
+            if simpleEpsilonUpdate:
+                updEpsilon = (
+                    epsilon * newTensor.shape[-1]
+                    - np.mean(elementwiseEpsilon[discard]) * discard.sum()
+                ) / (select.sum())
+            else:
+                if elementwiseNorm is None:
+                    elementwiseNorm = np.linalg.norm(newTensor, axis=0)
+                    for _ in range(len(self.ttCores) - 1):
+                        elementwiseNorm = np.linalg.norm(elementwiseNorm, axis=0)
+                allowedError = (self.ttEpsilon * np.linalg.norm(elementwiseNorm)) ** 2
+                discardedError = np.sum(
+                    (elementwiseEpsilon[discard] * elementwiseNorm[discard]) ** 2
+                )
+                updEpsilon = np.sqrt(
+                    (allowedError - discardedError)
+                    / (np.linalg.norm(elementwiseNorm[select]) ** 2)
+                )
+        self.reshapedShape[-1] = np.array(
+            select
+        ).sum()  # a little trick for ease of coding
+
+        indexString = "["
+        for _ in range(len(self.reshapedShape)):
+            # this heuristic assumes that the last dimension is for observations
+            indexString += ":,"
+        selectString = indexString + "select]"
+        selected = eval("newTensor" + selectString)
+
+        selected = selected.reshape(list(self.reshapedShape[:-1]) + [-1])[None, :]
+        for coreIdx in range(0, len(self.ttCores) - 1):
+            selected = selected.reshape(np.prod(self.ttCores[coreIdx].shape[:-1]), -1)
+            if ("occupancy" in heuristicsToUse) and (
+                self.coreOccupancy[coreIdx] >= occupancyThreshold
+            ):
+                pass
+            else:
+                Ui = self.ttCores[coreIdx].reshape(
+                    self.ttCores[coreIdx].shape[0] * self.reshapedShape[coreIdx], -1
+                )
+                Ri = selected - Ui @ (Ui.T @ selected)
+                if (elementwiseNorm is None) or ("subselect" not in heuristicsToUse):
+                    URi, _, _ = deltaSVD(
+                        Ri, np.linalg.norm(selected), newTensorSize, updEpsilon
+                    )
+                else:
+                    URi, _, _ = deltaSVD(
+                        Ri,
+                        np.linalg.norm(elementwiseNorm[select]),
+                        newTensorSize,
+                        updEpsilon,
+                    )
+                self.ttCores[coreIdx] = np.hstack((Ui, URi))
+                self.ttCores[coreIdx + 1] = np.concatenate(
+                    (
+                        self.ttCores[coreIdx + 1],
+                        np.zeros(
+                            (
+                                URi.shape[-1],
+                                self.ttCores[coreIdx + 1].shape[1],
+                                self.ttRanks[coreIdx + 2],
+                            )
+                        ),
+                    ),
+                    axis=0,
+                )
+
+            self.ttCores[coreIdx] = self.ttCores[coreIdx].reshape(
+                np.prod(self.ttCores[coreIdx].shape[:-1]), -1
+            )
+            # #project onto existing core and reshape for next core
+            selected = (self.ttCores[coreIdx].T @ selected).reshape(
+                self.ttCores[coreIdx + 1].shape[0] * self.reshapedShape[coreIdx + 1], -1
+            )
+            # fold back the previous core
+            self.ttCores[coreIdx] = self.ttCores[coreIdx].reshape(
+                -1, self.reshapedShape[coreIdx], self.ttCores[coreIdx].shape[-1]
+            )
+            # self.ttCores[coreIdx]=self.ttCores[coreIdx].reshape(self.ttCores[coreIdx].shape[0],self.reshapedShape[coreIdx],-1)
+            # #fold back the previous core
+        self.updateRanks()
+        coreIdx += 1
+        # coreIdx=len(self.ttCores), i.e working on the last core
+        self.ttCores[coreIdx] = self.ttCores[coreIdx].reshape(
+            self.ttCores[coreIdx].shape[0], -1
+        )
+        self.ttCores[coreIdx] = np.hstack(
+            (self.ttCores[coreIdx], self.projectTensor(newTensor))
+        ).reshape(self.ttCores[coreIdx].shape[0], -1, 1)
+        return None
