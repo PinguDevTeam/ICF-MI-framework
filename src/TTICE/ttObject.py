@@ -16,8 +16,7 @@ from pickle import dump, load
 
 
 class ttObject:
-    """
-    Python object for tensors in Tensor-Train format.
+    """Python object for tensors in Tensor-Train format.
 
     This object computes the TT-decomposition of multidimensional arrays using
     `TTSVD`_, `TT-ICE`_, and `TT-ICE*`_.
