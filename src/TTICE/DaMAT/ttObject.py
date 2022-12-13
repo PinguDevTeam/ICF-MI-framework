@@ -11,7 +11,7 @@ import warnings
 
 import numpy as np
 
-from pickle import dump
+from pickle import dump, load
 
 
 class ttObject:
@@ -281,3 +281,52 @@ class ttObject:
                     dump(self, saveFile)
             else:
                 raise ValueError("Unknown Method!")
+
+    @staticmethod
+    def loadData(fileName: str, numCores=None) -> "ttObject":
+        """
+        Loads data from a `.ttc` or `.txt` file
+
+
+        Static method to load TT-cores into a ttObject object.
+        Note
+        ----
+        If data is stored in {coreFile}_{coreIdx}.txt format,
+        the input fileName should just be coreFile.txt
+
+        Parameters
+        ----------
+        fileName:obj:`str`
+            Name of the file that will be loaded.
+        numCores:obj:`int`
+            Number of cores that the resulting `ttObject` will have
+            (Only required when input data format is `.txt`)
+        """
+        fileExt = fileName.split(".")[-1]
+        if fileExt == "ttc":
+            with open(fileName, "rb") as f:
+                dataSetObject = load(f)
+            return dataSetObject
+        elif fileExt == "txt":
+            if numCores is None:
+                raise ValueError("Number of cores are not defined!!")
+            fileBody = fileName.split(".")[0]
+            coreList = []
+            for coreIdx in range(numCores):
+                with open(f"{fileBody}_{coreIdx}.{fileExt}"):
+                    coreShape = f.readline()[2:-1]
+                    coreShape = [int(item) for item in coreShape.split(" ")]
+                coreList.append(
+                    np.loadtxt(f"{fileBody}_{coreIdx}.{fileExt}").reshape[coreShape]
+                )
+            return ttObject(coreList)
+        elif fileExt == "npy":
+            if numCores is None:
+                raise ValueError("Number of cores are not defined!!")
+            fileBody = fileName.split(".")[0]
+            coreList = []
+            for coreIdx in range(numCores):
+                coreList.append(np.load(f"{fileBody}_{coreIdx}.{fileExt}"))
+            return ttObject(coreList)
+        else:
+            raise ValueError(f"{fileExt} files are not supported!")
