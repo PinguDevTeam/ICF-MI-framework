@@ -7,6 +7,7 @@ or incrementally using [TT-ICE algorithm](https://arxiv.org/abs/2211.12487).
 Furthermore, this object allows exporting and importing TT-cores using native
 format (`.ttc`) and intermediary formats (`.txt`).
 """
+import warnings
 
 import numpy as np
 
@@ -124,3 +125,20 @@ class ttObject:
             self.updateRanks()
         else:
             raise TypeError("Unknown input type!")
+
+    @property
+    def coreOccupancy(self) -> None:
+        """
+        :obj:`list` of :obj:`float`: A metric showing the *relative rank* of each
+        TT-core. This metric is used for a heuristic enhancement tool in `TT-ICE*`
+        algorithm
+        """
+        try:
+            return [
+                core.shape[-1] / np.prod(core.shape[:-1]) for core in self.ttCores[:-1]
+            ]
+        except ValueError:
+            warnings.warn(
+                "No TT cores exist, maybe forgot calling object.ttDecomp?", Warning
+            )
+            return None
