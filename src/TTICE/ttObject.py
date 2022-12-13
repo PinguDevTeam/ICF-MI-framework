@@ -503,6 +503,12 @@ class ttObject:
         if norm is None:
             norm = np.linalg.norm(self.originalData)
         if self.method == "ttsvd":
+            if (dtype is not np.float364) and (self.ttEpsilon < 0.1):
+                warnings.warn(
+                    f"dtype {dtype} is not recommended for epsilon\
+                    values less than 0.1, switching to np.float64 instead."
+                )
+                dtype = np.float64
             startTime = time.time()
             self.ttRanks, self.ttCores = ttsvd(
                 self.originalData, norm, self.ttEpsilon, dtype=dtype

@@ -1,4 +1,4 @@
-""" This file contains the utility functions for running DaMAT pack"""
+""" This file contains the utility functions for running TTICE pack"""
 
 import numpy as np
 

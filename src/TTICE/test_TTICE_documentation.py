@@ -29,5 +29,5 @@ class main:
         samplesAlongLastDimension: bool = True,
         method: str = "ttsvd",
     ):
-        """This is the main function (LSTM)"""
+        """This is the main function (TTICE)"""
         print(templateFunction(1, 2))
