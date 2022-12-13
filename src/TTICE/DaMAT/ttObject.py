@@ -453,3 +453,25 @@ class ttObject:
             differenceNorm = np.linalg.norm(differenceNorm, axis=0)
         relError = differenceNorm / elementwiseNorm
         return relError
+
+    def computeRecError(self, data: np.array, start=None, finish=None) -> None:
+        """
+        Function to compute relative error by reconstructing data from slices
+        of TT-cores.
+        Currently not implemented.
+        """
+        if finish is None:
+            finish = start + 1
+        rec = self.reconstruct(self.ttCores[-1][:, start:finish, :]).reshape(
+            self.reshapedShape[:-1] + [-1]
+        )
+        data = data.reshape(self.reshapedShape[:-1] + [-1])
+        diff = data - rec
+        elementwiseNorm = np.linalg.norm(data, axis=0)
+        for _ in range(len(data.shape) - 2):
+            elementwiseNorm = np.linalg.norm(elementwiseNorm, axis=0)
+        diffNorm = np.linalg.norm(diff, axis=0)
+        for _ in range(len(diff.shape) - 2):
+            diffNorm = np.linalg.norm(diffNorm, axis=0)
+        recError = diffNorm / elementwiseNorm
+        return recError
