@@ -330,3 +330,43 @@ class ttObject:
             return ttObject(coreList)
         else:
             raise ValueError(f"{fileExt} files are not supported!")
+
+    def projectTensor(self, newData: np.array, upTo=None) -> np.array:
+        """
+        Projects tensors onto basis spanned by TT-cores.
+
+        Given a tensor with appropriate dimensions, this function leverages
+        the fact that TT-cores obtained through `TTSVD`_ and `TT-ICE`_ are
+        column-orthonormal in the mode-2 unfolding.
+
+        Note
+        ----
+        This function will not yield correct results if the TT-cores are
+        not comprised of orthogonal vectors.
+
+        Parameters
+        ----------
+        newData:obj:`np.aray`
+            Tensor to be projected
+        upTo:obj:`int`, optional
+            Index that the projection will be terminated. If an integer is
+            passed as this parameter, `newTensor` will be projected up to
+            (not including) the core that has index `upTo`. Assumes 1-based
+            indexing.
+
+         .. _TTSVD:
+            https://epubs.siam.org/doi/epdf/10.1137/090752286
+            _TT-ICE:
+            https://arxiv.org/abs/2211.12487
+            _TT-ICE*:
+            https://arxiv.org/abs/2211.12487
+        """
+        for coreIdx, core in enumerate(self.ttCores):
+            if (coreIdx == len(self.ttCores) - 1) or coreIdx == upTo:
+                break
+            newData = (
+                core.reshape(np.prod(core.shape[:2]), -1).transpose()
+            ) @ newData.reshape(
+                self.ttRanks[coreIdx] * self.ttCores[coreIdx].shape[1], -1
+            )
+        return newData
